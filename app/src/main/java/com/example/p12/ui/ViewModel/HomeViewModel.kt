@@ -25,7 +25,7 @@ class HomeViewModel(private val mhs: MahasiswaRepository): ViewModel() {
         getMhs()
     }
 
-    private fun getMhs() {
+    fun getMhs() {
         viewModelScope.launch {
             mhsUiState = HomeUiState.Loading
             mhsUiState = try {
