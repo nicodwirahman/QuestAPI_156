@@ -7,6 +7,7 @@ import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarScrollBehavior
@@ -15,29 +16,34 @@ import androidx.compose.ui.Modifier
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CostumeTopAppBar(
-    title: String, canNavigateBack: Boolean,
+fun CustomeTopAppBar(
+    title: String,
+    canNavigateBack: Boolean,
     modifier: Modifier = Modifier,
     scrollBehavior: TopAppBarScrollBehavior? = null,
     navigateUp: () -> Unit = {},
-    onRefresh: () -> Unit = {},
-
-    ) {
+    onRefresh: () -> Unit = {}
+) {
     CenterAlignedTopAppBar(
-        title = { Text(title) },
+        title = { Text(text = title) },
         actions = {
-            Icon(imageVector = Icons.Default.Refresh, contentDescription = "", modifier = Modifier.clickable {
-                onRefresh()
-            })
+            Icon(
+                imageVector = Icons.Default.Refresh,
+                contentDescription = "Refresh",
+                modifier = Modifier.clickable { onRefresh() }
+            )
         },
         modifier = modifier,
-        scrollBehavior = scrollBehavior, navigationIcon =
-        { if (canNavigateBack) {
-            IconButton(onClick = navigateUp) {
-                Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
+        scrollBehavior = scrollBehavior,
+        navigationIcon = {
+            if (canNavigateBack) {
+                IconButton(onClick = navigateUp) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = "Navigate Back"
+                    )
+                }
             }
-        }
         }
     )
 }
-
