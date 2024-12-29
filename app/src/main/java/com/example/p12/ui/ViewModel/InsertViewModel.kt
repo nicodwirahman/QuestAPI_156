@@ -4,7 +4,7 @@ import com.example.p12.model.Mahasiswa
 
 
 data class InsertUiState(
-    val insert
+    val insertUiEvent: InsertUiEvent = InsertUiEvent()
 )
 
 data class InsertUiEvent(
