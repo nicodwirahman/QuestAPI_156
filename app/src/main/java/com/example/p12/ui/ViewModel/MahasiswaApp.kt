@@ -1,4 +1,4 @@
-package com.example.p12
+package com.example.p12.ui.ViewModel
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
