@@ -26,6 +26,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.p12.ui.ViewModel.InsertUiEvent
 import com.example.p12.ui.ViewModel.InsertUiState
 import com.example.p12.ui.ViewModel.InsertViewModel
+import com.example.p12.ui.ViewModel.PenyediaViewModel
 import com.example.p12.ui.navigasi.CustomeTopAppBar
 import com.example.p12.ui.navigasi.DestinasiNavigasi
 import kotlinx.coroutines.launch
@@ -40,7 +41,7 @@ object DestinasiEntry : DestinasiNavigasi {
 fun EntryMhsScreen(
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: InsertViewModel = viewModel()
+    viewModel: InsertViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val coroutineScope = rememberCoroutineScope()

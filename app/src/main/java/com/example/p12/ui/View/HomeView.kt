@@ -1,5 +1,6 @@
 package com.example.p12.ui.View
 
+import android.text.Spannable.Factory
 import androidx.compose.material3.Button
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -43,6 +44,7 @@ import com.example.p12.R
 import com.example.p12.model.Mahasiswa
 import com.example.p12.ui.ViewModel.HomeUiState
 import com.example.p12.ui.ViewModel.HomeViewModel
+import com.example.p12.ui.ViewModel.PenyediaViewModel
 import com.example.p12.ui.navigasi.CustomeTopAppBar
 import com.example.p12.ui.navigasi.DestinasiNavigasi
 import org.w3c.dom.Text
@@ -58,7 +60,7 @@ fun HomeScreen(
     navigateToItemEntry: () -> Unit,
     modifier: Modifier = Modifier,
     onDetailClick: (String) -> Unit = {},
-    viewModel: HomeViewModel = viewModel()
+    viewModel: HomeViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
