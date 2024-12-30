@@ -17,7 +17,28 @@ class UpdateMhsViewModel(
         private set
 
     // Memuat data Mahasiswa berdasarkan NIM
+    fun loadMahasiswa(mahasiswaNim: String) {
+        viewModelScope.launch {
+            try {
+                val mahasiswa = mhsRepository.getMahasiswabyNim(mahasiswaNim)
+                uiState = uiState.copy(insertUiEvent = mahasiswa.toInsertUiEvent())
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
 
+    // Memperbarui data Mahasiswa
+    fun updateMahasiswa() {
+        viewModelScope.launch {
+            try {
+                val mahasiswa = uiState.insertUiEvent.toMhs()
+                mhsRepository.updateMahasiswa(mahasiswa.nim, mahasiswa)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
 
     // Memperbarui UI State berdasarkan event baru
     fun updateInsertMhsState(insertUiEvent: InsertUiEvent) {
