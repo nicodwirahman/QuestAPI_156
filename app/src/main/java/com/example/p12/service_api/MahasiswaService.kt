@@ -1,6 +1,7 @@
 package com.example.p12.service_api
 
 import com.example.p12.model.Mahasiswa
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -30,45 +31,5 @@ interface MahasiswaService {
     )
 
     @DELETE("deletemahasiswa.php")
-    suspend fun deleteMahasiswa(@Query("nim") nim: String)
+    suspend fun deleteMahasiswa(@Query("nim") nim: String): Response<Void>
 }
-
-interface MahasiswaRepository {
-    suspend fun getMahasiswa(): List<Mahasiswa>
-
-    suspend fun insertMahasiswa(mahasiswa: Mahasiswa)
-
-    suspend fun updateMahasiswa(nim: String, mahasiswa: Mahasiswa)
-
-    suspend fun deleteMahasiswa(nim: String)
-
-    suspend fun getMahasiswabyNim(nim: String): Mahasiswa
-}
-
-class NetworkMahasiswaRepository(
-    private val mahasiswaApiService: MahasiswaService
-) : MahasiswaRepository {
-    override suspend fun getMahasiswa(): List<Mahasiswa> =
-        mahasiswaApiService.getAllMahasiswa()
-
-    override suspend fun insertMahasiswa(mahasiswa: Mahasiswa) {
-        mahasiswaApiService.insertMahasiswa(mahasiswa)
-    }
-
-    override suspend fun updateMahasiswa(nim: String, mahasiswa: Mahasiswa) {
-        mahasiswaApiService.updateMahasiswa(nim, mahasiswa)
-    }
-
-    override suspend fun deleteMahasiswa(nim: String) {
-        mahasiswaApiService.deleteMahasiswa(nim)
-    }
-
-    override suspend fun getMahasiswabyNim(nim: String): Mahasiswa {
-        return mahasiswaApiService.getMahasiswabyNim(nim)
-    }
-}
-
-
-
-
-
