@@ -27,6 +27,47 @@ import com.example.p12.ui.ViewModel.UpdateUiState
 import com.example.p12.ui.navigasi.CustomeTopAppBar
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun UpdateScreen(
+    nim: String,
+    navigateBack: () -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: UpdateMhsViewModel = viewModel(factory = PenyediaViewModel.Factory)
+) {
+    val coroutineScope = rememberCoroutineScope()
+
+    // Muat data mahasiswa berdasarkan ID
+    LaunchedEffect(nim) {
+        viewModel.loadMahasiswa(nim)
+    }
+
+    Scaffold(
+        topBar = {
+            CustomeTopAppBar(
+                title = "Update Mahasiswa",
+                canNavigateBack = true,
+                navigateUp = navigateBack
+            )
+        }
+    ) { innerPadding ->
+        UpdateBody(
+            updateUiState = viewModel.uiState,
+            onSiswaValueChange = viewModel::updateInsertMhsState,
+            onSaveClick = {
+                coroutineScope.launch {
+                    viewModel.updateMahasiswa()
+                    navigateBack()
+                }
+            },
+            modifier = Modifier
+                .padding(innerPadding)
+                .verticalScroll(rememberScrollState())
+                .fillMaxWidth()
+        )
+    }
+}
+
 @Composable
 fun UpdateBody(
     updateUiState: UpdateUiState,
