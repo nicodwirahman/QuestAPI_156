@@ -5,13 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.p12.repository.MahasiswaRepository
+import kotlinx.coroutines.launch
 
-class UpdateMhsView(private val mhsRepository: MahasiswaRepository):ViewModel(){
-    var uiState by mutableStateOf(UpdateUiState)
-}
-
-
+// State untuk Update Mahasiswa
 data class UpdateUiState(
-    val insertUiState: InsertUiState = InsertUiState()
+    val insertUiEvent: InsertUiEvent = InsertUiEvent()
 )
