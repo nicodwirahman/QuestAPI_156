@@ -3,13 +3,6 @@ package com.example.p12.repository
 import com.example.p12.model.Mahasiswa
 import com.example.p12.service_api.MahasiswaService
 import okio.IOException
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.POST
-import retrofit2.http.PUT
-import retrofit2.http.Query
 
 interface MahasiswaRepository {
     suspend fun getMahasiswa(): List<Mahasiswa>
@@ -38,12 +31,29 @@ class NetworkMahasiswaRepository(
     }
 
     override suspend fun deleteMahasiswa(nim: String) {
-        mahasiswaApiService.deleteMahasiswa(nim)
+        try {
+            val response = mahasiswaApiService.deleteMahasiswa(nim)
+            if (!response.isSuccessful   ) {
+                throw IOException("Failed to delete kontak. HTTP Status code: " +
+                        "${response.code()}")
+            } else {
+                response.message()
+                println(response.message())
+            }
+        } catch (e: Exception){
+            throw  e
+        }
     }
 
     override suspend fun getMahasiswabyNim(nim: String): Mahasiswa {
-        return mahasiswaApiService.getMahasiswabyNim(nim)
+        return try {
+            mahasiswaApiService.getMahasiswabyNim(nim)
+        } catch (e: Exception) {
+            println("Error fetching mahasiswa by ID: ${e.message}")
+            throw e
+        }
     }
-}
+    }
+
 
 
