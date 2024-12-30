@@ -142,7 +142,7 @@ fun HomeStatus(
 @Composable
 fun OnLoading(modifier: Modifier = Modifier) { Image(
     modifier = modifier.size(200.dp),
-    painter = painterResource(R.drawable.loading_img), contentDescription = stringResource(R.string.loading)
+    painter = painterResource(R.drawable.loading), contentDescription = stringResource(R.string.loading)
 )
 }
 
@@ -160,7 +160,7 @@ fun OnError(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_connection_error), contentDescription = ""
+            painter = painterResource(id = R.drawable.error), contentDescription = ""
         )
         Text(
             text = stringResource(R.string.loading_failed),
